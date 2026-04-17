@@ -1,0 +1,1045 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>grOmarcO – Grossiste Lunettes Premium</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --cream: #FAF8F4;
+      --cream2: #F2EDE4;
+      --sand: #E8DDD0;
+      --gold: #B8963E;
+      --gold2: #D4AF6A;
+      --dark: #1A1410;
+      --dark2: #2D2520;
+      --text: #3D3530;
+      --gray: #8A7F78;
+      --white: #FFFFFF;
+      --green-wa: #25D366;
+      --accent: #5C7A6E;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{font-family:"Inter",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+    /* ── LOGO SVG ── */
+    .logo-svg { height:50px; width:auto; display: block; margin: 5px 0; }
+
+    /* ── NAVBAR ── */
+    nav{
+      position:fixed;top:0;width:100%;z-index:1000;
+      background:rgba(250,248,244,0.95);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--sand);
+      display:flex;align-items:center;justify-content:space-between;
+      padding:0 6%;height:72px;
+    }
+    .nav-links{display:flex;gap:2.5rem;list-style:none;}
+    .nav-links a{color:var(--gray);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;transition:color .3s;}
+    .nav-links a:hover{color:var(--gold);}
+    .nav-cta{
+      background:var(--dark);color:var(--cream);padding:11px 26px;
+      border-radius:2px;font-weight:600;font-size:0.8rem;text-decoration:none;
+      text-transform:uppercase;letter-spacing:1.5px;transition:.3s;
+    }
+    .nav-cta:hover{background:var(--gold);}
+    .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;}
+    .hamburger span{width:24px;height:1.5px;background:var(--dark);border-radius:2px;transition:.3s;}
+    .mobile-menu{display:none;flex-direction:column;background:var(--cream);padding:1.5rem 6%;gap:1.2rem;position:fixed;top:72px;left:0;width:100%;z-index:999;border-bottom:1px solid var(--sand);box-shadow:0 10px 30px rgba(0,0,0,0.08);}
+    .mobile-menu a{color:var(--text);text-decoration:none;font-size:0.95rem;padding:0.5rem 0;border-bottom:1px solid var(--sand);letter-spacing:1px;}
+    .mobile-menu.open{display:flex;}
+
+    /* ── HERO ── */
+    .hero{
+      min-height:100vh;display:grid;grid-template-columns:1fr 1fr;
+      align-items:center;padding:0 6%;padding-top:72px;gap:4rem;
+      background:linear-gradient(135deg, var(--cream) 0%, var(--cream2) 100%);
+      position:relative;overflow:hidden;
+    }
+    .hero::after{
+      content:"";position:absolute;right:-200px;top:-200px;
+      width:600px;height:600px;border-radius:50%;
+      background:radial-gradient(circle, rgba(184,150,62,0.08) 0%, transparent 70%);
+      pointer-events:none;
+    }
+    .hero-left{position:relative;z-index:1;}
+    .hero-badge{
+      display:inline-flex;align-items:center;gap:8px;
+      background:var(--sand);border:1px solid rgba(184,150,62,0.3);
+      color:var(--gold);padding:6px 16px;border-radius:2px;font-size:0.72rem;
+      text-transform:uppercase;letter-spacing:3px;margin-bottom:2rem;font-weight:600;
+    }
+    .hero h1{
+      font-family:"Playfair Display",serif;font-size:clamp(2.8rem,5vw,4.5rem);
+      font-weight:900;line-height:1.05;letter-spacing:-1px;color:var(--dark);margin-bottom:1.5rem;
+    }
+    .hero h1 em{font-style:normal;color:var(--gold);}
+    .hero-desc{font-size:1.05rem;color:var(--gray);line-height:1.8;margin-bottom:2.5rem;max-width:480px;}
+    .hero-btns{display:flex;gap:1rem;flex-wrap:wrap;}
+    .btn-dark{
+      background:var(--dark);color:var(--white);padding:15px 32px;border-radius:2px;
+      font-weight:600;font-size:0.88rem;text-decoration:none;text-transform:uppercase;
+      letter-spacing:1.5px;transition:.3s;display:inline-flex;align-items:center;gap:10px;
+    }
+    .btn-dark:hover{background:var(--gold);transform:translateY(-2px);}
+    .btn-light{
+      border:1.5px solid var(--dark);color:var(--dark);padding:13px 32px;border-radius:2px;
+      font-weight:600;font-size:0.88rem;text-decoration:none;text-transform:uppercase;
+      letter-spacing:1.5px;transition:.3s;
+    }
+    .btn-light:hover{background:var(--dark);color:var(--white);}
+    .hero-stats{display:flex;gap:3rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--sand);}
+    .stat-num{font-family:"Playfair Display",serif;font-size:2rem;font-weight:700;color:var(--dark);}
+    .stat-label{font-size:0.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-top:4px;}
+    .hero-right{position:relative;height:600px;}
+    .hero-img-main{
+      width:100%;height:100%;object-fit:cover;border-radius:4px;
+      box-shadow:0 30px 80px rgba(0,0,0,0.15);
+    }
+    .hero-img-float{
+      position:absolute;bottom:-30px;left:-40px;width:220px;height:280px;
+      object-fit:cover;border-radius:4px;border:6px solid var(--cream);
+      box-shadow:0 20px 60px rgba(0,0,0,0.12);
+    }
+    .hero-tag-float{
+      position:absolute;top:30px;right:-20px;background:var(--white);
+      padding:16px 20px;border-radius:4px;box-shadow:0 10px 40px rgba(0,0,0,0.1);
+      min-width:160px;
+    }
+    .hero-tag-float .tag-num{font-family:"Playfair Display",serif;font-size:1.8rem;font-weight:700;color:var(--gold);}
+    .hero-tag-float .tag-text{font-size:0.72rem;color:var(--gray);text-transform:uppercase;letter-spacing:2px;}
+
+    /* ── MARQUEE ── */
+    .marquee-section{background:var(--dark);padding:18px 0;overflow:hidden;}
+    .marquee-track{display:flex;gap:4rem;animation:marquee 25s linear infinite;white-space:nowrap;}
+    .marquee-item{color:var(--gold2);font-size:0.75rem;text-transform:uppercase;letter-spacing:4px;font-weight:500;flex-shrink:0;}
+    .marquee-dot{color:var(--gold);font-size:0.6rem;}
+    @keyframes marquee{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+    /* ── SECTION BASE ── */
+    section{padding:100px 6%;}
+    .section-label{color:var(--gold);font-size:0.72rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;margin-bottom:1rem;}
+    .section-title{font-family:"Playfair Display",serif;font-size:clamp(2rem,4vw,3rem);font-weight:700;line-height:1.1;color:var(--dark);margin-bottom:1rem;}
+    .section-desc{color:var(--gray);font-size:1rem;line-height:1.8;max-width:560px;}
+    .gold-line{width:50px;height:2px;background:linear-gradient(90deg,var(--gold),var(--gold2));margin:1.2rem 0 2rem;border-radius:2px;}
+
+    /* ── PROCESS ── */
+    .process-section{background:var(--cream2);}
+    .process-inner{max-width:1200px;margin:0 auto;}
+    .process-header{text-align:center;margin-bottom:5rem;}
+    .process-header .section-desc{margin:0 auto;}
+    .process-header .gold-line{margin:1.2rem auto 0;}
+    .process-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:3px;background:var(--sand);}
+    .process-card{
+      background:var(--cream);padding:3rem 2.5rem;position:relative;
+      transition:.3s;
+    }
+    .process-card:hover{background:var(--dark);color:var(--white);}
+    .process-card:hover .proc-num,.process-card:hover h3{color:var(--gold2);}
+    .process-card:hover p{color:rgba(255,255,255,0.6);}
+    .proc-num{font-family:"Playfair Display",serif;font-size:3.5rem;font-weight:700;color:var(--sand);line-height:1;margin-bottom:1.5rem;transition:.3s;}
+    .proc-icon{font-size:1.5rem;margin-bottom:1rem;}
+    .process-card h3{font-family:"Playfair Display",serif;font-weight:700;font-size:1.1rem;margin-bottom:0.7rem;color:var(--dark);transition:.3s;}
+    .process-card p{color:var(--gray);font-size:0.88rem;line-height:1.7;transition:.3s;}
+
+    /* ── CATALOGUE ── */
+    .catalogue-section{background:var(--cream);}
+    .cat-inner{max-width:1200px;margin:0 auto;}
+    .cat-header{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:1rem;margin-bottom:4rem;}
+    .products-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:2px;background:var(--sand);}
+    .product-card{background:var(--cream);overflow:hidden;transition:.4s;position:relative;cursor:pointer;}
+    .product-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+    .product-img{height:260px;overflow:hidden;position:relative;}
+    .product-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+    .product-card:hover .product-img img{transform:scale(1.05);}
+    .product-badge{
+      position:absolute;top:16px;left:16px;background:var(--dark);color:var(--cream);
+      font-size:0.65rem;font-weight:600;padding:5px 12px;border-radius:2px;text-transform:uppercase;letter-spacing:2px;
+    }
+    .product-badge.gold{background:var(--gold);}
+    .product-info{padding:1.8rem;}
+    .product-category{color:var(--gold);font-size:0.7rem;text-transform:uppercase;letter-spacing:3px;font-weight:600;margin-bottom:0.5rem;}
+    .product-name{font-family:"Playfair Display",serif;font-weight:700;font-size:1.25rem;color:var(--dark);margin-bottom:0.5rem;}
+    .product-desc{color:var(--gray);font-size:0.87rem;line-height:1.6;margin-bottom:1rem;}
+    .product-price-note{font-size:0.8rem;color:var(--accent);font-weight:500;margin-bottom:1.3rem;letter-spacing:0.5px;}
+
+    /* ── VOIR MODÈLES BUTTON ── */
+    .btn-voir{
+      display:flex;align-items:center;justify-content:center;gap:10px;
+      background:var(--dark);color:var(--cream);padding:13px;border-radius:2px;
+      text-decoration:none;font-weight:600;font-size:0.82rem;transition:.3s;
+      text-transform:uppercase;letter-spacing:1.5px;border:none;cursor:pointer;width:100%;
+      margin-bottom:10px;
+    }
+    .btn-voir:hover{background:var(--gold);transform:scale(1.01);}
+    .btn-wa{
+      display:flex;align-items:center;justify-content:center;gap:8px;
+      background:var(--green-wa);color:white;padding:13px;border-radius:2px;
+      text-decoration:none;font-weight:600;font-size:0.82rem;transition:.3s;
+      text-transform:uppercase;letter-spacing:1.5px;
+    }
+    .btn-wa:hover{background:#1EBE5A;transform:scale(1.01);}
+    .btn-wa svg{width:18px;height:18px;fill:white;}
+
+    /* ── PRODUCT SUB-VIEW OVERLAY ── */
+    .subview-overlay{
+      display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+      background:var(--cream);z-index:2000;overflow-y:auto;
+    }
+    .subview-overlay.active{display:block;animation:fadeInUp 0.35s ease;}
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+    .subview-header{
+      position:sticky;top:0;background:rgba(250,248,244,0.97);backdrop-filter:blur(16px);
+      border-bottom:1px solid var(--sand);padding:0 6%;height:72px;
+      display:flex;align-items:center;justify-content:space-between;z-index:10;
+    }
+    .subview-back{
+      display:flex;align-items:center;gap:10px;background:none;border:1px solid var(--sand);
+      color:var(--dark);padding:10px 22px;border-radius:2px;cursor:pointer;font-size:0.82rem;
+      font-weight:600;letter-spacing:1.5px;text-transform:uppercase;transition:.3s;font-family:"Inter",sans-serif;
+    }
+    .subview-back:hover{background:var(--dark);color:var(--cream);border-color:var(--dark);}
+    .subview-back svg{width:16px;height:16px;}
+    .subview-title-area{text-align:center;}
+    .subview-cat-label{color:var(--gold);font-size:0.7rem;letter-spacing:4px;text-transform:uppercase;font-weight:600;}
+    .subview-cat-name{font-family:"Playfair Display",serif;font-size:1.2rem;font-weight:700;color:var(--dark);}
+    .subview-wa-btn{
+      display:flex;align-items:center;gap:8px;background:var(--green-wa);color:white;
+      padding:10px 22px;border-radius:2px;text-decoration:none;font-weight:600;
+      font-size:0.78rem;letter-spacing:1.5px;text-transform:uppercase;transition:.3s;
+    }
+    .subview-wa-btn:hover{background:#1EBE5A;}
+    .subview-wa-btn svg{width:16px;height:16px;fill:white;}
+
+    .subview-content{padding:4rem 6%;}
+    .subview-intro{max-width:600px;margin:0 auto 4rem;text-align:center;}
+    .subview-intro h2{font-family:"Playfair Display",serif;font-size:2rem;font-weight:700;color:var(--dark);margin-bottom:1rem;}
+    .subview-intro p{color:var(--gray);font-size:0.95rem;line-height:1.8;}
+
+    .items-grid{
+      display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
+      gap:2px;background:var(--sand);max-width:1200px;margin:0 auto;
+    }
+    .item-card{
+      background:var(--cream);overflow:hidden;transition:.4s;position:relative;
+    }
+    .item-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,0.1);}
+    .item-img{height:220px;overflow:hidden;position:relative;}
+    .item-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s;}
+    .item-card:hover .item-img img{transform:scale(1.07);}
+    .item-badge{
+      position:absolute;top:12px;left:12px;background:var(--dark);color:var(--cream);
+      font-size:0.6rem;font-weight:600;padding:4px 10px;border-radius:2px;
+      text-transform:uppercase;letter-spacing:2px;
+    }
+    .item-badge.gold{background:var(--gold);}
+    .item-info{padding:1.4rem;}
+    .item-ref{color:var(--gold);font-size:0.65rem;text-transform:uppercase;letter-spacing:3px;font-weight:600;margin-bottom:0.4rem;}
+    .item-name{font-family:"Playfair Display",serif;font-weight:700;font-size:1.05rem;color:var(--dark);margin-bottom:0.4rem;}
+    .item-detail{color:var(--gray);font-size:0.82rem;line-height:1.5;margin-bottom:1rem;}
+    .item-price-note{font-size:0.75rem;color:var(--accent);font-weight:500;margin-bottom:1rem;letter-spacing:0.5px;}
+    .btn-item-wa{
+      display:flex;align-items:center;justify-content:center;gap:7px;
+      background:var(--green-wa);color:white;padding:11px;border-radius:2px;
+      text-decoration:none;font-weight:600;font-size:0.78rem;transition:.3s;
+      text-transform:uppercase;letter-spacing:1.5px;
+    }
+    .btn-item-wa:hover{background:#1EBE5A;}
+    .btn-item-wa svg{width:16px;height:16px;fill:white;}
+
+    /* ── AVANTAGES ── */
+    .avantages-section{background:var(--dark);color:var(--cream);}
+    .av-inner{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;}
+    .av-left .section-title{color:var(--cream);}
+    .av-left .section-desc{color:rgba(250,248,244,0.6);}
+    .av-img{width:100%;height:500px;object-fit:cover;border-radius:4px;}
+    .av-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;margin-top:3rem;}
+    .av-card{border-top:1px solid rgba(250,248,244,0.15);padding-top:1.5rem;}
+    .av-icon{font-size:1.4rem;margin-bottom:0.8rem;}
+    .av-card h4{font-family:"Playfair Display",serif;font-weight:700;font-size:1rem;color:var(--cream);margin-bottom:0.5rem;}
+    .av-card p{color:rgba(250,248,244,0.5);font-size:0.83rem;line-height:1.6;}
+
+    /* ── COMMANDE ── */
+    .commande-section{background:var(--cream2);text-align:center;}
+    .cmd-inner{max-width:680px;margin:0 auto;}
+    .cmd-inner .section-title{color:var(--dark);}
+    .cmd-inner .gold-line{margin:1.2rem auto 2rem;}
+    .cmd-desc{color:var(--gray);font-size:1rem;line-height:1.8;margin-bottom:3rem;}
+    .wa-big{
+      display:inline-flex;align-items:center;gap:14px;
+      background:var(--green-wa);color:white;padding:20px 48px;
+      border-radius:2px;text-decoration:none;font-weight:700;font-size:1rem;
+      text-transform:uppercase;letter-spacing:2px;transition:.3s;
+      box-shadow:0 10px 40px rgba(37,211,102,0.2);
+    }
+    .wa-big:hover{background:#1EBE5A;transform:translateY(-3px);box-shadow:0 15px 50px rgba(37,211,102,0.3);}
+    .wa-big svg{width:24px;height:24px;fill:white;}
+    .info-strip{display:flex;gap:1px;background:var(--sand);margin-top:4rem;border-radius:2px;overflow:hidden;flex-wrap:wrap;}
+    .info-item{background:var(--cream);flex:1;min-width:160px;padding:2rem;text-align:center;}
+    .info-item .inf-num{font-family:"Playfair Display",serif;font-size:1.6rem;font-weight:700;color:var(--gold);}
+    .info-item .inf-label{font-size:0.75rem;color:var(--gray);text-transform:uppercase;letter-spacing:2px;margin-top:4px;}
+
+    /* ── FAQ ── */
+    .faq-section{background:var(--cream);}
+    .faq-inner{max-width:760px;margin:0 auto;}
+    .faq-list{margin-top:3rem;display:flex;flex-direction:column;}
+    .faq-item{border-bottom:1px solid var(--sand);}
+    .faq-q{
+      padding:1.5rem 0;cursor:pointer;display:flex;justify-content:space-between;align-items:center;
+      font-weight:600;font-size:0.95rem;color:var(--dark);transition:color .3s;
+    }
+    .faq-q:hover{color:var(--gold);}
+    .faq-a{padding:0 0 1.5rem;color:var(--gray);font-size:0.9rem;line-height:1.8;display:none;}
+    .faq-item.open .faq-a{display:block;}
+    .faq-item.open .faq-q{color:var(--gold);}
+    .faq-arrow{font-size:1.3rem;font-weight:300;transition:transform .3s;color:var(--gold);}
+    .faq-item.open .faq-arrow{transform:rotate(45deg);}
+
+    /* ── FOOTER ── */
+    footer{background:var(--dark2);padding:4rem 6% 2rem;color:var(--cream);}
+    .footer-top{display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:3rem;padding-bottom:3rem;border-bottom:1px solid rgba(250,248,244,0.1);}
+    .footer-brand p{color:rgba(250,248,244,0.45);font-size:0.88rem;line-height:1.7;max-width:280px;margin-top:1rem;}
+    .footer-nav h5{font-size:0.72rem;text-transform:uppercase;letter-spacing:3px;color:var(--gold2);margin-bottom:1.2rem;}
+    .footer-nav a{display:block;color:rgba(250,248,244,0.5);text-decoration:none;font-size:0.88rem;margin-bottom:0.7rem;transition:color .3s;}
+    .footer-nav a:hover{color:var(--cream);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;padding-top:2rem;flex-wrap:wrap;gap:1rem;}
+    .footer-bottom p{color:rgba(250,248,244,0.3);font-size:0.78rem;}
+
+    /* ── FLOAT WA ── */
+    .float-wa{
+      position:fixed;bottom:28px;right:28px;z-index:9999;
+      background:var(--green-wa);color:white;width:58px;height:58px;
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      text-decoration:none;box-shadow:0 5px 25px rgba(37,211,102,0.35);
+      transition:.3s;animation:wapulse 2.5s infinite;
+    }
+    .float-wa svg{width:26px;height:26px;fill:white;}
+    .float-wa:hover{transform:scale(1.1);}
+    @keyframes wapulse{0%,100%{box-shadow:0 5px 25px rgba(37,211,102,0.35);}50%{box-shadow:0 5px 40px rgba(37,211,102,0.6);}}
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      .hero{grid-template-columns:1fr;padding-top:90px;gap:2rem;}
+      .hero-right{height:380px;}
+      .hero-img-float{display:none;}
+      .av-inner{grid-template-columns:1fr;}
+      .nav-links,.nav-cta{display:none;}
+      .hamburger{display:flex;}
+      .subview-wa-btn span{display:none;}
+    }
+    @media(max-width:600px){
+      section{padding:70px 5%;}
+      .hero{padding:80px 5% 3rem;}
+      .hero h1{font-size:2.4rem;}
+      .hero-stats{gap:2rem;}
+      .av-grid{grid-template-columns:1fr;}
+      .products-grid{grid-template-columns:1fr;}
+      .items-grid{grid-template-columns:1fr;}
+      .info-strip{flex-direction:column;}
+      .footer-top{flex-direction:column;}
+      .footer-bottom{flex-direction:column;text-align:center;}
+      .subview-header{padding:0 5%;}
+      .subview-cat-name{font-size:0.95rem;}
+    }
+  
+
+  /* ── CAROUSEL ── */
+  .item-card { position:relative; background:var(--cream); overflow:hidden; transition:.3s; }
+  .item-card:hover { transform:translateY(-3px); box-shadow:0 16px 50px rgba(0,0,0,0.1); }
+  .item-carousel { position:relative; height:240px; overflow:hidden; background:var(--cream2); }
+  .item-carousel img { width:100%; height:100%; object-fit:cover; transition:opacity .35s ease; display:block; }
+  .car-btn { position:absolute; top:50%; transform:translateY(-50%); background:rgba(26,20,16,0.55); color:#fff;
+    border:none; width:34px; height:34px; border-radius:50%; font-size:1.2rem; cursor:pointer; z-index:3;
+    display:flex; align-items:center; justify-content:center; transition:.25s; opacity:0; }
+  .item-card:hover .car-btn { opacity:1; }
+  .car-btn:hover { background:var(--gold); }
+  .car-prev { left:8px; }
+  .car-next { right:8px; }
+  .car-dots { position:absolute; bottom:8px; left:50%; transform:translateX(-50%);
+    display:flex; gap:5px; z-index:3; }
+  .car-dot { width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.5);
+    cursor:pointer; transition:.2s; border:none; padding:0; }
+  .car-dot.active { background:#fff; width:16px; border-radius:3px; }
+  .car-count { position:absolute; top:10px; right:10px; background:rgba(26,20,16,0.6);
+    color:#fff; font-size:0.65rem; padding:3px 8px; border-radius:10px; z-index:3;
+    font-weight:600; letter-spacing:1px; }
+  .item-badge { position:absolute; top:12px; left:12px; z-index:3;
+    background:var(--dark); color:var(--cream); font-size:0.6rem; font-weight:600;
+    padding:4px 10px; border-radius:2px; text-transform:uppercase; letter-spacing:2px; }
+  .item-badge.gold { background:var(--gold); }
+  .item-info { padding:1.4rem; }
+  .item-ref { color:var(--gold); font-size:0.65rem; text-transform:uppercase; letter-spacing:3px; font-weight:600; margin-bottom:.35rem; }
+  .item-name { font-family:'Playfair Display',serif; font-weight:700; font-size:1.05rem; color:var(--dark); margin-bottom:.35rem; }
+  .item-detail { color:var(--gray); font-size:0.82rem; line-height:1.5; margin-bottom:.9rem; }
+  .item-price-note { font-size:0.75rem; color:var(--accent); font-weight:500; margin-bottom:1rem; letter-spacing:.5px; }
+  .btn-item-wa { display:flex; align-items:center; justify-content:center; gap:7px;
+    background:var(--green-wa); color:white; padding:11px; border-radius:2px;
+    text-decoration:none; font-weight:600; font-size:0.78rem; transition:.3s;
+    text-transform:uppercase; letter-spacing:1.5px; }
+  .btn-item-wa:hover { background:#1EBE5A; }
+  .btn-item-wa svg { width:16px; height:16px; fill:white; }
+
+  </style>
+</head>
+<body>
+
+<!-- ══ NAVBAR ══ -->
+<nav>
+  <svg class="logo-svg" viewBox="0 0 310 66" xmlns="http://www.w3.org/2000/svg">
+  <text x="2" y="43" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif" font-weight="600" font-size="46" fill="#1A1410" letter-spacing="1">gr</text>
+  <circle cx="89" cy="25" r="22" fill="none" stroke="#B8963E" stroke-width="2"/>
+  <circle cx="89" cy="25" r="14" fill="none" stroke="rgba(184,150,62,0.25)" stroke-width="1"/>
+  <text x="66" y="43" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif" font-weight="600" font-size="46" fill="#1A1410">O</text>
+  <line x1="112" y1="25" x2="244" y2="25" stroke="#B8963E" stroke-width="1" opacity="0.35"/>
+  <text x="113" y="43" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif" font-weight="600" font-size="46" fill="#1A1410" letter-spacing="1">marc</text>
+  <circle cx="266" cy="25" r="22" fill="none" stroke="#B8963E" stroke-width="2"/>
+  <circle cx="266" cy="25" r="14" fill="none" stroke="rgba(184,150,62,0.25)" stroke-width="1"/>
+  <text x="243" y="43" font-family="'Cormorant Garamond','Playfair Display',Georgia,serif" font-weight="600" font-size="46" fill="#1A1410">O</text>
+  <text x="155" y="61" font-family="Inter,sans-serif" font-weight="400" font-size="10" fill="#B8963E" text-anchor="middle" letter-spacing="6">OPTICAL BOUTIQUE</text>
+</svg>
+  <ul class="nav-links">
+    <li><a href="#catalogue">Catalogue</a></li>
+    <li><a href="#process">Commander</a></li>
+    <li><a href="#avantages">À Propos</a></li>
+    <li><a href="#faq">FAQ</a></li>
+  </ul>
+  <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20souhaite%20passer%20une%20commande%20en%20gros." class="nav-cta">Demander un Devis</a>
+  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#catalogue" onclick="toggleMenu()">Catalogue</a>
+  <a href="#process" onclick="toggleMenu()">Comment Commander</a>
+  <a href="#avantages" onclick="toggleMenu()">À Propos</a>
+  <a href="#faq" onclick="toggleMenu()">FAQ</a>
+  <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20souhaite%20une%20commande%20en%20gros." style="color:var(--green-wa);font-weight:700;">Demander un Devis WhatsApp</a>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero" id="home">
+  <div class="hero-left">
+    <span class="hero-badge">Vente Exclusivement en Gros</span>
+    <h1>L'Excellence<br><em>Optique</em><br>au Meilleur<br>Prix Grossiste</h1>
+    <p class="hero-desc">grOmarcO est votre fournisseur de référence pour les lunettes premium au Maroc. Palettes complètes, modèles sur mesure, tarifs réservés aux professionnels.</p>
+    <div class="hero-btns">
+      <a href="#catalogue" class="btn-dark">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+        Voir le Catalogue
+      </a>
+      <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20veux%20connaitre%20vos%20prix%20grossiste." class="btn-light">Demander les Prix</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="stat-num">500+</div><div class="stat-label">Modèles</div></div>
+      <div class="stat-item"><div class="stat-num">24H</div><div class="stat-label">Réponse</div></div>
+      <div class="stat-item"><div class="stat-num">100%</div><div class="stat-label">Pro</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img class="hero-img-main" src="https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=800&q=90" alt="Lunettes premium grOmarcO"/>
+    <img class="hero-img-float" src="https://images.unsplash.com/photo-1508296695146-257a814070b4?w=400&q=85" alt="Collection grOmarcO"/>
+    <div class="hero-tag-float">
+      <div class="tag-num">+200</div>
+      <div class="tag-text">Grossistes Partenaires</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ MARQUEE ══ -->
+<div class="marquee-section">
+  <div class="marquee-track">
+    <span class="marquee-item">Lunettes de Soleil</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Montures Optiques</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Collection Sport</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Palettes Grossiste</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Livraison Maroc</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Prix Compétitifs</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Lunettes de Soleil</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Montures Optiques</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Collection Sport</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Palettes Grossiste</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Livraison Maroc</span><span class="marquee-dot">◆</span>
+    <span class="marquee-item">Prix Compétitifs</span><span class="marquee-dot">◆</span>
+  </div>
+</div>
+
+<!-- ══ PROCESS ══ -->
+<section class="process-section" id="process">
+  <div class="process-inner">
+    <div class="process-header">
+      <div class="section-label">Processus Simple</div>
+      <h2 class="section-title">Comment Commander en Gros ?</h2>
+      <div class="gold-line"></div>
+      <p class="section-desc">Quatre étapes suffisent pour recevoir votre commande, où que vous soyez au Maroc.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card">
+        <div class="proc-num">01</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg></div>
+        <h3>Parcourez le Catalogue</h3>
+        <p>Explorez nos collections et repérez les modèles ou palettes qui correspondent à votre marché.</p>
+      </div>
+      <div class="process-card">
+        <div class="proc-num">02</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"/></svg></div>
+        <h3>Préparez Votre Sélection</h3>
+        <p>Notez les références, quantités et variantes que vous souhaitez. Palette mixte ou un seul modèle.</p>
+      </div>
+      <div class="process-card">
+        <div class="proc-num">03</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+        <h3>Contactez sur WhatsApp</h3>
+        <p>Envoyez votre sélection. Nous vous communiquons immédiatement le tarif selon votre volume.</p>
+      </div>
+      <div class="process-card">
+        <div class="proc-num">04</div>
+        <div class="proc-icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+        <h3>Confirmez &amp; Recevez</h3>
+        <p>Accord validé, paiement confirmé — votre commande est préparée et expédiée sous 24 à 48h.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ CATALOGUE ══ -->
+<section class="catalogue-section" id="catalogue">
+  <div class="cat-inner">
+    <div class="cat-header">
+      <div>
+        <div class="section-label">Nos Collections</div>
+        <h2 class="section-title">Catalogue Grossiste</h2>
+        <div class="gold-line"></div>
+        <p class="section-desc">Cliquez sur une collection pour explorer tous les modèles disponibles.</p>
+      </div>
+    </div>
+    <div class="products-grid">
+
+      <!-- CARD 1 -->
+      <div class="product-card" onclick="openSubview('classic')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=700&q=85" alt="Collection Classic"/>
+          <span class="product-badge gold">Bestseller</span>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Lunettes de Soleil</div>
+          <div class="product-name">Collection Classic</div>
+          <div class="product-desc">Montures classiques intemporelles. Disponibles en palette de 24, 48 ou 100 pièces. Idéales pour tout type de boutique.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('classic')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (8)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20la%20Collection%20Classic%20en%20gros.%20Quels%20sont%20vos%20prix%20?" class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 2 -->
+      <div class="product-card" onclick="openSubview('fashion')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=700&q=85" alt="Collection Fashion"/>
+          <span class="product-badge">Tendance</span>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Lunettes de Soleil</div>
+          <div class="product-name">Collection Fashion</div>
+          <div class="product-desc">Design contemporain et tendance. Idéal pour boutiques de mode. Palette de 24 à 200 pièces disponibles.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('fashion')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (8)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20la%20Collection%20Fashion%20en%20gros." class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 3 -->
+      <div class="product-card" onclick="openSubview('optique')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=700&q=85" alt="Collection Optique"/>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Montures Optiques</div>
+          <div class="product-name">Collection Optique</div>
+          <div class="product-desc">Montures optiques pour hommes et femmes. Qualité premium. Commande minimum 50 unités par référence.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('optique')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (7)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20vos%20montures%20Optiques%20en%20gros." class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 4 -->
+      <div class="product-card" onclick="openSubview('sport')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=700&q=85" alt="Collection Sport"/>
+          <span class="product-badge">Nouveau</span>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Sport &amp; Outdoor</div>
+          <div class="product-name">Collection Sport</div>
+          <div class="product-desc">Lunettes de sport polarisées, protection UV400. Performance et style. Palette de 12 à 100 pièces.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('sport')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (8)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20voudrais%20des%20infos%20sur%20la%20Collection%20Sport%20en%20gros." class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 5 -->
+      <div class="product-card" onclick="openSubview('palette')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=700&q=85" alt="Palette Mixte"/>
+          <span class="product-badge gold">Gros Volume</span>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Palettes Mixtes</div>
+          <div class="product-name">Palette Assortie</div>
+          <div class="product-desc">Mix personnalisé de plusieurs modèles en une seule palette. Idéal pour diversifier votre stock selon votre clientèle.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('palette')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (7)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20voudrais%20commander%20une%20palette%20assortie%20en%20gros." class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+      <!-- CARD 6 -->
+      <div class="product-card" onclick="openSubview('kids')">
+        <div class="product-img">
+          <img src="https://images.unsplash.com/photo-1577803645773-f96470509666?w=700&q=85" alt="Collection Kids"/>
+        </div>
+        <div class="product-info">
+          <div class="product-category">Enfants</div>
+          <div class="product-name">Collection Kids</div>
+          <div class="product-desc">Lunettes robustes et colorées pour enfants. Design sécurisé et tendance. Palette de 24 à 120 pièces.</div>
+          <div class="product-price-note">Prix sur demande WhatsApp uniquement</div>
+          <button class="btn-voir" onclick="event.stopPropagation();openSubview('kids')">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
+            Voir les Modèles (8)
+          </button>
+          <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20la%20Collection%20Kids%20en%20gros." class="btn-wa" onclick="event.stopPropagation()">
+            <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+            Demander le Prix
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ PRODUCT SUB-VIEW OVERLAY ══ -->
+<div class="subview-overlay" id="subviewOverlay">
+  <div class="subview-header">
+    <button class="subview-back" onclick="closeSubview()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+      Retour
+    </button>
+    <div class="subview-title-area">
+      <div class="subview-cat-label" id="svLabel"></div>
+      <div class="subview-cat-name" id="svName"></div>
+    </div>
+    <a id="svWaBtn" href="#" class="subview-wa-btn">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      <span>Commander en gros</span>
+    </a>
+  </div>
+  <div class="subview-content">
+    <div class="subview-intro">
+      <h2 id="svIntroTitle"></h2>
+      <p id="svIntroDesc"></p>
+    </div>
+    <div class="items-grid" id="svGrid"></div>
+  </div>
+</div>
+
+<!-- ══ AVANTAGES ══ -->
+<section class="avantages-section" id="avantages">
+  <div class="av-inner">
+    <div class="av-left">
+      <div class="section-label" style="color:var(--gold2);">Pourquoi grOmarcO</div>
+      <h2 class="section-title">Le Partenaire Grossiste de Confiance</h2>
+      <div class="gold-line"></div>
+      <p class="section-desc">Nous travaillons uniquement avec des professionnels et nous nous engageons à offrir les meilleures conditions du marché.</p>
+      <div class="av-grid">
+        <div class="av-card">
+          <div class="av-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B8963E" stroke-width="1.5"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg></div>
+          <h4>Large Gamme</h4>
+          <p>500+ modèles disponibles — soleil, optique, sport, enfants, palette mixte.</p>
+        </div>
+        <div class="av-card">
+          <div class="av-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B8963E" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <h4>Réponse Rapide</h4>
+          <p>Réponse garantie sous 24h sur WhatsApp pour tout devis et commande.</p>
+        </div>
+        <div class="av-card">
+          <div class="av-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B8963E" stroke-width="1.5"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"/></svg></div>
+          <h4>Prix Compétitifs</h4>
+          <p>Tarifs dégressifs selon le volume. Plus vous commandez, meilleures sont les conditions.</p>
+        </div>
+        <div class="av-card">
+          <div class="av-icon"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#B8963E" stroke-width="1.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div>
+          <h4>Livraison Maroc</h4>
+          <p>Livraison partout au Maroc sous 48-72h. Emballage sécurisé et soigné.</p>
+        </div>
+      </div>
+    </div>
+    <div>
+      <img class="av-img" src="https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=700&q=85" alt="grOmarcO Collection"/>
+    </div>
+  </div>
+</section>
+
+<!-- ══ COMMANDE ══ -->
+<section class="commande-section" id="commande">
+  <div class="cmd-inner">
+    <div class="section-label">Passer Commande</div>
+    <h2 class="section-title">Prêt à Commander en Gros ?</h2>
+    <div class="gold-line"></div>
+    <p class="cmd-desc">Les prix ne sont pas affichés sur le site — ils sont personnalisés selon votre volume et votre fréquence d'achat. Contactez-nous directement sur WhatsApp pour recevoir votre devis en moins de 24h.</p>
+    <a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%20👋%20Je%20suis%20grossiste%20et%20je%20souhaite%20passer%20une%20commande%20en%20gros.%20Pouvez-vous%20me%20donner%20vos%20prix%20?" class="wa-big">
+      <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+      Contacter sur WhatsApp
+    </a>
+    <div class="info-strip">
+      <div class="info-item"><div class="inf-num">12+</div><div class="inf-label">Pièces minimum</div></div>
+      <div class="info-item"><div class="inf-num">24H</div><div class="inf-label">Délai de réponse</div></div>
+      <div class="info-item"><div class="inf-num">48H</div><div class="inf-label">Délai livraison</div></div>
+      <div class="info-item"><div class="inf-num">100%</div><div class="inf-label">Professionnel</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FAQ ══ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <div class="section-label">Questions Fréquentes</div>
+    <h2 class="section-title">FAQ Grossistes</h2>
+    <div class="gold-line"></div>
+    <div class="faq-list">
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Pourquoi les prix ne sont-ils pas affichés sur le site ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Les prix varient selon les quantités commandées, le type de produits et la fréquence d'achat. Contactez-nous sur WhatsApp pour un tarif personnalisé adapté à votre volume.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quelle est la quantité minimum de commande ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">La commande minimum est de 12 pièces par modèle. Pour les palettes mixtes, le minimum est de 48 pièces. Contactez-nous pour tout arrangement particulier.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Puis-je commander une palette sur mesure avec des modèles mixtes ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Oui, absolument. Vous pouvez nous indiquer les modèles et quantités souhaités et nous préparons votre palette sur mesure selon vos besoins exacts.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Livrez-vous partout au Maroc ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Oui, nous livrons partout au Maroc — Casablanca, Rabat, Marrakech, Fès, Tanger, Agadir et toutes les autres villes. Délai de 48 à 72 heures ouvrables.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Quels sont les modes de paiement acceptés ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Nous acceptons le virement bancaire, le cash à la livraison et d'autres modalités discutées lors de votre échange sur WhatsApp avec notre équipe.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">Y a-t-il des avantages pour les clients réguliers ? <span class="faq-arrow">+</span></div>
+        <div class="faq-a">Oui. Dès votre première commande, vous êtes éligible à nos conditions préférentielles. Plus vous commandez et plus les prix s'améliorent. Parlez-en directement sur WhatsApp.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <svg viewBox="0 0 280 44" xmlns="http://www.w3.org/2000/svg" style="height:36px;width:auto;">
+        <text x="0" y="36" font-family="Georgia,serif" font-weight="900" font-size="38" fill="#FAF8F4" letter-spacing="1">gr</text>
+        <circle cx="78" cy="21" r="16" fill="none" stroke="#B8963E" stroke-width="2.5"/>
+        <circle cx="78" cy="21" r="10" fill="rgba(184,150,62,0.1)" stroke="#D4AF6A" stroke-width="1"/>
+        <line x1="94" y1="21" x2="102" y2="21" stroke="#B8963E" stroke-width="2"/>
+        <text x="104" y="36" font-family="Georgia,serif" font-weight="900" font-size="38" fill="#FAF8F4" letter-spacing="1">marc</text>
+        <circle cx="232" cy="21" r="16" fill="none" stroke="#B8963E" stroke-width="2.5"/>
+        <circle cx="232" cy="21" r="10" fill="rgba(184,150,62,0.1)" stroke="#D4AF6A" stroke-width="1"/>
+      </svg>
+      <p>Fournisseur grossiste de lunettes premium au Maroc. Vente exclusivement aux professionnels.</p>
+    </div>
+    <div class="footer-nav">
+      <h5>Navigation</h5>
+      <a href="#catalogue">Catalogue</a>
+      <a href="#process">Comment Commander</a>
+      <a href="#avantages">À Propos</a>
+      <a href="#faq">FAQ</a>
+    </div>
+    <div class="footer-nav">
+      <h5>Contact</h5>
+      <a href="https://wa.me/212660635539">WhatsApp Grossiste</a>
+      <a href="https://wa.me/212660635539?text=Demande%20de%20devis">Demander un Devis</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 grOmarcO — Tous droits réservés. Vente exclusivement aux professionnels.</p>
+    <p style="color:rgba(250,248,244,0.2);">Maroc</p>
+  </div>
+</footer>
+
+<!-- ══ FLOAT WA ══ -->
+<a href="https://wa.me/212660635539?text=Bonjour%20grOmarcO%20👋%20Je%20souhaite%20passer%20une%20commande%20en%20gros." class="float-wa">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+</a>
+
+<script>
+// ── CATALOGUE DATA ──
+const WA = '212660635539';
+const waIcon = `<svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>`;
+
+const CATALOGUE = {
+  classic: {
+    label: "Lunettes de Soleil",
+    name: "Collection Classic",
+    introTitle: "Classiques Intemporels",
+    introDesc: "Des montures qui traversent les tendances. Idéales pour tout point de vente, ces modèles se vendent toute l'année.",
+    waText: "Collection%20Classic",
+    items: [
+      {ref:"CL-001",name:"Aviator Gold",detail:"Monture métal dorée, verres fumés. Unisexe. ×12 ou ×24.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80"]},
+      {ref:"CL-002",name:"Wayfarer Noir",detail:"Monture acétate noire, style iconique. Palette de 24 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+      {ref:"CL-003",name:"Round Vintage",detail:"Forme ronde, monture fine. Plusieurs coloris. ×12 min.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80"]},
+      {ref:"CL-004",name:"Oversized Brown",detail:"Grand format, monture tortoise. Femme. Palette de 24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"CL-005",name:"Rectangle Slim",detail:"Monture fine rectangulaire, homme/femme. ×12 min.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"CL-006",name:"Clubmaster Bronze",detail:"Style rétro clubmaster, métal bronze. ×24 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"CL-007",name:"Cat Eye Classic",detail:"Forme cat-eye, monture acétate. Femme. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+      {ref:"CL-008",name:"Hexagonal Silver",detail:"Forme hexagonale, métal argenté. Unisexe. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80"]},
+      {ref:"CL-009",name:"Square Tortoise",detail:"Forme carrée, écaille tortoise. ×24 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"CL-010",name:"Teardrop Gold",detail:"Monture teardrop, dorée. Style pilote classique. ×12.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80"]},
+      {ref:"CL-011",name:"Rimless Classic",detail:"Monture sans bord, légère. Homme. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"CL-012",name:"Semi-Rimless",detail:"Semi-cerclé, style moderne. Unisexe. Palette ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80"]},
+    ]
+  },
+  fashion: {
+    label: "Lunettes de Soleil",
+    name: "Collection Fashion",
+    introTitle: "Modèles Tendance",
+    introDesc: "Designs contemporains et saisonniers. Idéaux pour boutiques de mode, ces modèles attirent l'œil.",
+    waText: "Collection%20Fashion",
+    items: [
+      {ref:"FA-001",name:"Shield Futuriste",detail:"Monture enveloppante verre unique. Très tendance. ×12 min.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"FA-002",name:"Y2K Butterfly",detail:"Forme papillon, style années 2000. Coloris vifs. ×24.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"FA-003",name:"Hexagonal Smoke",detail:"Forme hexagonale, verres smoke miroir. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80"]},
+      {ref:"FA-004",name:"Mini Oval Gold",detail:"Petite monture ovale, dorée. Très demandée. ×24.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"FA-005",name:"Wide Square",detail:"Format large carré, tendance 2025. Unisexe. ×12.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80"]},
+      {ref:"FA-006",name:"Gradient Blue",detail:"Monture transparente, verres dégradé bleu. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80"]},
+      {ref:"FA-007",name:"Mirror Rose Gold",detail:"Verres effet miroir rose gold. Femme. ×12 min.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"FA-008",name:"Angular Black",detail:"Monture angulaire noire mat. Unisexe. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80"]},
+      {ref:"FA-009",name:"Vintage Green",detail:"Verres verts vintage, monture fine. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"FA-010",name:"Crystal Clear",detail:"Monture transparente ultra légère. ×24 pièces.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"FA-011",name:"Tortoise Chic",detail:"Acétate tortoise premium. Femme. Palette ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80"]},
+      {ref:"FA-012",name:"Leopard Frame",detail:"Imprimé léopard, monture acétate. ×12 min.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80"]},
+    ]
+  },
+  optique: {
+    label: "Montures Optiques",
+    name: "Collection Optique",
+    introTitle: "Optique Premium",
+    introDesc: "Montures optiques certifiées CE pour hommes et femmes. Compatibles toutes corrections.",
+    waText: "Collection%20Optique",
+    items: [
+      {ref:"OP-001",name:"Business Classic",detail:"Monture rectangulaire homme, noir mat. ×12 min.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-002",name:"Round Acetate",detail:"Forme ronde, acétate. Homme/Femme. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-003",name:"Square Titanium",detail:"Monture titane carré, légère. Homme. ×12.",badge:"Premium",badgeGold:true,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"OP-004",name:"Aviator Optique",detail:"Style aviateur optique, métal doré. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-005",name:"Rectangle Slim",detail:"Monture fine rectangulaire. Femme. ×12 min.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+      {ref:"OP-006",name:"Cat Eye Women",detail:"Forme cat-eye féminine, acétate. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-007",name:"Minimalist Wire",detail:"Monture fil ultra fine, légère. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"OP-008",name:"Bold Black",detail:"Monture acétate épaisse, noire. Unisexe. ×12.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"OP-009",name:"Tortoise Medium",detail:"Écaille tortoise, format médium. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80"]},
+      {ref:"OP-010",name:"Half-Rim Gold",detail:"Semi-cerclé doré. Homme/Femme. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-011",name:"Rectangular Women",detail:"Rectangle féminin, coloris variés. ×24.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"OP-012",name:"Oxford Classic",detail:"Style Oxford, acétate premium. Homme. ×12.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+    ]
+  },
+  sport: {
+    label: "Sport & Outdoor",
+    name: "Collection Sport",
+    introTitle: "Performance & Style",
+    introDesc: "Lunettes sport UV400, polarisées. Idéales pour le sport, la plage, les loisirs outdoor.",
+    waText: "Collection%20Sport",
+    items: [
+      {ref:"SP-001",name:"Wraparound Pro",detail:"Enveloppant, polarisé UV400. TR90. ×12 min.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-002",name:"Cycling Elite",detail:"Spécial vélo, branches ajustables. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-003",name:"Running Shield",detail:"Verre unique panoramique. Running. ×12.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-004",name:"MTB Enduro",detail:"VTT/Enduro, protection maximale. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-005",name:"Ski Glacier",detail:"Anti-UV haute montagne. Ski/Rando. ×12.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80"]},
+      {ref:"SP-006",name:"Trail Runner",detail:"Trail running, léger et flexible. ×12 min.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-007",name:"Triathlon",detail:"Aérodynamique, verre photochromique. ×12.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80"]},
+      {ref:"SP-008",name:"Watersport",detail:"Résistant sel/eau. Plage & surf. ×12 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-009",name:"Photochromic Run",detail:"Verres photochromiques auto-adaptables. ×12.",badge:"Premium",badgeGold:true,photos:["https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-010",name:"Urban Sport",detail:"Ville & sport, style moderne. ×24 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80"]},
+      {ref:"SP-011",name:"Kids Sport",detail:"Sport enfants, branches souples. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"SP-012",name:"Extreme UV",detail:"UV400 maximum, verre catégorie 4. ×12.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80"]},
+    ]
+  },
+  palette: {
+    label: "Palettes Mixtes",
+    name: "Palette Assortie",
+    introTitle: "Palettes Grossiste",
+    introDesc: "Assortiments mixtes prêts à la revente. Stock diversifié, rentabilité maximale.",
+    waText: "Palette%20Assortie",
+    items: [
+      {ref:"PM-001",name:"Palette Classic Mix",detail:"Mix classiques homme/femme. 48 pièces. ×48.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80"]},
+      {ref:"PM-002",name:"Palette Fashion Mix",detail:"Mix modèles fashion tendance. 48 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80"]},
+      {ref:"PM-003",name:"Palette Sport Mix",detail:"Mix sport polarisé UV400. 48 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80"]},
+      {ref:"PM-004",name:"Palette Kids Mix",detail:"Mix enfants colorés, 48 pièces.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"PM-005",name:"Palette Femme",detail:"Sélection féminine 60 pièces. Mix styles.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80"]},
+      {ref:"PM-006",name:"Palette Homme",detail:"Sélection masculine 60 pièces. Mix styles.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80"]},
+      {ref:"PM-007",name:"Palette Été",detail:"Collection été, verres colorés. 72 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80", "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"PM-008",name:"Palette Printemps",detail:"Teintes pastel printemps. 48 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+      {ref:"PM-009",name:"Palette Luxe",detail:"Modèles premium sélectionnés. 24 pièces.",badge:"Premium",badgeGold:true,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1483181957632-8bda974cbc91?w=600&q=80"]},
+      {ref:"PM-010",name:"Palette Entrée Gamme",detail:"Modèles économiques, 96 pièces.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80"]},
+      {ref:"PM-011",name:"Palette Mix 100",detail:"100 pièces mix toutes catégories.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80"]},
+      {ref:"PM-012",name:"Palette Kids+Adulte",detail:"Mix enfants et adultes. 48 pièces. Famille.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80", "https://images.unsplash.com/photo-1556306535-0f09a537f0a3?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+    ]
+  },
+  kids: {
+    label: "Enfants",
+    name: "Collection Kids",
+    introTitle: "Lunettes Enfants",
+    introDesc: "Montures sécurisées, colorées et résistantes pour les enfants. Normes CE, branches souples.",
+    waText: "Collection%20Kids",
+    items: [
+      {ref:"KD-001",name:"Mini Aviator",detail:"Mini aviateur métal, enfant 6-12 ans. ×24.",badge:"Bestseller",badgeGold:true,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1473496169904-658ba7574b0d?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-002",name:"Butterfly Kids",detail:"Forme papillon colorée. Fille 4-10 ans. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-003",name:"Sport Kids",detail:"Sport enfant, branches souples TR90. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1452626038306-9aae5e071dd3?w=600&q=80"]},
+      {ref:"KD-004",name:"Heart Frame",detail:"Monture cœur rose. Fille 3-8 ans. ×24.",badge:"Tendance",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-005",name:"Round Coloré",detail:"Rond coloré, plusieurs teintes. ×24 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1511499767150-a48a237f0083?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-006",name:"Cat Eye Kids",detail:"Cat-eye enfant, monture colorée. ×24.",badge:"Nouveau",badgeGold:false,photos:["https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-007",name:"Square Fun",detail:"Carré fun, couleurs vives. 4-10 ans. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-008",name:"Mini Wayfarer",detail:"Mini wayfarer, garçon/fille. ×24 pièces.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1508296695146-257a814070b4?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-009",name:"Princess Frame",detail:"Monture rose perlée. Fille 5-12 ans. ×24.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=600&q=80"]},
+      {ref:"KD-010",name:"Super Hero",detail:"Montures super-héros colorées. ×48 pièces.",badge:"Gros Volume",badgeGold:true,photos:["https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1572635196237-14b3f281503f?w=600&q=80", "https://images.unsplash.com/photo-1509695507497-903c140c43b0?w=600&q=80"]},
+      {ref:"KD-011",name:"Beach Kids",detail:"Plage, résistant eau. 4-14 ans. ×24 min.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1516975080664-ed2fc6a32937?w=600&q=80", "https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+      {ref:"KD-012",name:"School Kids",detail:"Lunettes école légères et résistantes. ×48.",badge:"",badgeGold:false,photos:["https://images.unsplash.com/photo-1577803645773-f96470509666?w=600&q=80", "https://images.unsplash.com/photo-1591076482161-42ce6da69f67?w=600&q=80", "https://images.unsplash.com/photo-1468235415386-459ee05f52b9?w=600&q=80", "https://images.unsplash.com/photo-1574258495973-f010dfbb5371?w=600&q=80"]},
+    ]
+  },
+};
+
+// ── SUBVIEW LOGIC ──
+function openSubview(catKey) {
+  const cat = CATALOGUE[catKey];
+  if (!cat) return;
+  document.getElementById('svLabel').textContent = cat.label;
+  document.getElementById('svName').textContent = cat.name;
+  document.getElementById('svIntroTitle').textContent = cat.introTitle;
+  document.getElementById('svIntroDesc').textContent = cat.introDesc;
+  document.getElementById('svWaBtn').href = 'https://wa.me/' + WA + '?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20la%20' + cat.waText + '%20en%20gros.';
+
+  const grid = document.getElementById('svGrid');
+  grid.innerHTML = cat.items.map(item => {
+    const ph0 = item.photos[0];
+    const photoJson = JSON.stringify(item.photos).replace(/"/g, '&quot;');
+    const badge = item.badge ? `<span class="item-badge ${item.badgeGold ? 'gold' : ''}">${item.badge}</span>` : '';
+    const dots = item.photos.map((_, i) => `<button class="car-dot${i===0?' active':''}" data-idx="${i}"></button>`).join('');
+    const count = item.photos.length > 1 ? `<div class="car-count">1 / ${item.photos.length}</div>` : '';
+    return `
+    <div class="item-card" data-photos="${photoJson}">
+      <div class="item-carousel">
+        <img class="car-img" src="${ph0}" alt="${item.name}" loading="lazy"/>
+        ${count}
+        ${badge}
+        ${item.photos.length > 1 ? '<button class="car-btn car-prev" aria-label="Précédent">&#8249;</button><button class="car-btn car-next" aria-label="Suivant">&#8250;</button>' : ''}
+        <div class="car-dots">${dots}</div>
+      </div>
+      <div class="item-info">
+        <div class="item-ref">${item.ref}</div>
+        <div class="item-name">${item.name}</div>
+        <div class="item-detail">${item.detail}</div>
+        <div class="item-price-note">Prix sur demande WhatsApp</div>
+        <a href="https://wa.me/${WA}?text=Bonjour%20grOmarcO%2C%20je%20suis%20intéressé(e)%20par%20${encodeURIComponent(item.ref + ' — ' + item.name)}%20en%20gros.%20Quels%20sont%20vos%20prix%20?" class="btn-item-wa">
+          ${waIcon} Demander le Prix
+        </a>
+      </div>
+    </div>`;
+  }).join('');
+
+  initCarousels();
+  const el = document.getElementById('subviewOverlay');
+  el.classList.add('active');
+  el.scrollTop = 0;
+  document.body.style.overflow = 'hidden';
+}
+
+function closeSubview() {
+  document.getElementById('subviewOverlay').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// ── CAROUSEL INIT ──
+function initCarousels() {
+  document.querySelectorAll('#svGrid .item-card').forEach(function(card) {
+    var photos;
+    try { photos = JSON.parse(card.dataset.photos); } catch(e) { return; }
+    if (!photos || photos.length <= 1) return;
+    var current = 0;
+    var img = card.querySelector('.car-img');
+    var dots = card.querySelectorAll('.car-dot');
+    var countEl = card.querySelector('.car-count');
+
+    function goTo(idx) {
+      current = (idx + photos.length) % photos.length;
+      img.style.opacity = '0';
+      setTimeout(function() { img.src = photos[current]; img.style.opacity = '1'; }, 150);
+      dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+      if (countEl) countEl.textContent = (current + 1) + ' / ' + photos.length;
+    }
+
+    var prev = card.querySelector('.car-prev');
+    var next = card.querySelector('.car-next');
+    if (prev) prev.addEventListener('click', function(e) { e.stopPropagation(); goTo(current - 1); });
+    if (next) next.addEventListener('click', function(e) { e.stopPropagation(); goTo(current + 1); });
+    dots.forEach(function(d, i) {
+      d.addEventListener('click', function(e) { e.stopPropagation(); goTo(i); });
+    });
+  });
+}
+
+// ── UI HELPERS ──
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+function toggleFaq(el) {
+  el.closest('.faq-item').classList.toggle('open');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSubview();
+  });
+  document.querySelectorAll('[href^="#"]').forEach(function(a) {
+    a.addEventListener('click', function(e) {
+      var h = this.getAttribute('href');
+      if (h.length > 1) {
+        e.preventDefault();
+        var t = document.querySelector(h);
+        if (t) window.scrollTo({ top: t.offsetTop - 80, behavior: 'smooth' });
+      }
+    });
+  });
+});
+</script>
+</body>
+</html>
